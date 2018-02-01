@@ -1,0 +1,114 @@
+<form>
+  <!-- tagproperties -->
+  <div [formGroup]="form" >
+    <div class="sectiontitle margin-bottom-10">
+        <div class="">
+            <input value="Save" (click)="save()" style="margin-top:-10px;" type="submit"
+                   [disabled]="!form.valid || !form.dirty " class="btn btn-primary">
+          </div>    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <span class="fa-stack pull-right">
+          <a data-modal="" (click)="addIngredient()" title="Add tag property">
+            <i class='fa fa-plus fa-inverse'>Add</i>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" id="replacetarget">
+        <div class="panel panel-default table-responsive">
+          <div formArrayName="ingredients">
+            <table class="table table-hover" id="tagProperties">
+              <thead>
+                <tr>
+                  <th>
+                    Ingredient
+                  </th>
+                  <th>
+                    quantities
+                  </th>
+                 <th>
+
+                 </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ingredient of ingredientsFormArray.controls; let i=index" [formGroupName]="i">
+                  <td>
+                    <input type="text" class="form-control" formControlName="name">
+
+                  </td>
+                  <td>
+                <table formArrayName="quantities">
+                  <thead>
+                    <tr>
+                      <th>amount</th>
+                      <th>sku</th>
+                      <span class="fa-stack pull-right">
+                          <a data-modal="" (click)="addQuantity(i)" title="Add tag property">
+                            <i class='fa fa-plus fa-inverse'>Add Quantity</i>
+                          </a>
+                        </span>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let quantity of ingredientsFormArray.controls[i].controls['quantities'].controls; let i2=index" [formGroupName]="i2">
+                      <td>
+                          <input type="text" class="form-control" formControlName="amount">
+
+                      </td>
+                      <td>
+                          <input type="text" class="form-control" formControlName="sku">
+
+                      </td>
+                      <td>
+                          <div class="pull-right">
+                            <span class="fa-stack">
+                              <a data-modal="" (click)="resetQuantity(i,i2)" title="Reset">
+                                <i class='fa fa-undo fa-inverse'>reset quantity</i>
+                              </a>
+                            </span>
+                            <span class="fa-stack">
+                              <a data-modal="" (click)="deleteQuantity(i,i2)" title="Delete">
+                                <i class='fa fa-times fa-inverse'>delete quantity</i>
+                              </a>
+                            </span>
+      
+                          </div>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+                  </td>
+                 
+
+                  <td>
+                    <div class="pull-right">
+                      <span class="fa-stack">
+                        <a data-modal="" (click)="resetIngredient(i)" title="Reset">
+                          <i class='fa fa-undo fa-inverse'>reset Ingredient</i>
+                        </a>
+                      </span>
+                      <span class="fa-stack">
+                        <a data-modal="" (click)="deleteIngredient(i)" title="Delete">
+                          <i class='fa fa-times fa-inverse'>delete Ingredient</i>
+                        </a>
+                      </span>
+
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</form>
